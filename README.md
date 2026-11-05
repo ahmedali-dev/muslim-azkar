@@ -33,6 +33,13 @@ are removed after the build. Keep an offline backup of the chosen signing key;
 future releases need the same key to update existing installs. No keys or
 passwords belong in Git history.
 
+This repository uses a dedicated app signing key stored in encrypted Actions
+secrets. Its public SHA-256 certificate fingerprint is in
+`signing-certificate.sha256`. A private local backup is kept outside Git in
+`.tooling/signing/`; keep that folder safe. The first GitHub release has a
+different signature from the earlier development APKs, so those installations
+need a one-time reinstall. Subsequent GitHub releases use the same app key.
+
 The Arabic landing page is static HTML in `site/`, with bundled fonts and local
 screenshots. `.github/workflows/pages.yml` deploys it to GitHub Pages on changes
 to `site/` or by manual dispatch. Set the repository's Pages source to **GitHub

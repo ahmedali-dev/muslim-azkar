@@ -7,3 +7,9 @@
 - APKs for Android 6 (API 23) and newer; each architecture APK is under 15 MB.
 
 Download `app-arm64-v8a-release.apk` for most modern Android phones, or ARMv7 for older phones. The `.aab` is intended for store upload. `SHA256SUMS.txt` verifies the downloads. The source ZIP/TAR archives are available below.
+
+Signing: this is the first public release signed with the dedicated Muslim Azkar
+app key. Earlier development-signed APKs cannot be updated in place; a one-time
+reinstall is required and removes their local progress/settings. Future GitHub
+releases will keep the same signature. The public certificate fingerprint is
+recorded in `signing-certificate.sha256` in the repository.
