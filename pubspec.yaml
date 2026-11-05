@@ -1,0 +1,42 @@
+name: muslim_azkar
+description: Arabic offline azkar and supplications in 27 categories.
+publish_to: none
+version: 1.4.1+7
+
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  provider: ^6.1.5
+  shared_preferences: ^2.5.3
+  flutter_local_notifications: 19.5.0
+  timezone: ^0.10.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/morning_azkar.json
+    - assets/evening_azkar.json
+    - assets/categories/
+    - assets/fonts/Amiri-OFL.txt
+    - assets/fonts/Tajawal-OFL.txt
+  fonts:
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Regular.ttf
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/Tajawal-Regular.ttf
+        - asset: assets/fonts/Tajawal-Bold.ttf
+          weight: 700

@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "key": "morning",
+    "title": "أذكار الصباح",
+    "url": "https://www.islambook.com/azkar/1/أذكار-الصباح",
+    "asset": "assets/morning_azkar.json",
+    "count": 31
+  },
+  {
+    "id": 2,
+    "key": "evening",
+    "title": "أذكار المساء",
+    "url": "https://www.islambook.com/azkar/2/أذكار-المساء",
+    "asset": "assets/evening_azkar.json",
+    "count": 30
+  },
+  {
+    "id": 9,
+    "key": "afterPrayer",
+    "title": "أذكار بعد الصلاة",
+    "url": "https://www.islambook.com/azkar/9/أذكار-بعد-السلام-من-الصلاة-المفروضة",
+    "asset": "assets/categories/9.json",
+    "count": 11
+  },
+  {
+    "id": 3,
+    "key": "tasbih",
+    "title": "تسابيح",
+    "url": "https://www.islambook.com/azkar/3/تسابيح-تسبيح-السبحة-أذكار-عظيمة",
+    "asset": "assets/categories/3.json",
+    "count": 18
+  },
+  {
+    "id": 11,
+    "key": "sleep",
+    "title": "أذكار النوم",
+    "url": "https://www.islambook.com/azkar/11/أذكار-النوم-والأحلام",
+    "asset": "assets/categories/11.json",
+    "count": 15
+  },
+  {
+    "id": 12,
+    "key": "waking",
+    "title": "أذكار الاستيقاظ",
+    "url": "https://www.islambook.com/azkar/12/أذكار-الإستيقاظ-من-النوم",
+    "asset": "assets/categories/12.json",
+    "count": 3
+  },
+  {
+    "id": 22,
+    "key": "prayer",
+    "title": "أذكار الصلاة",
+    "url": "https://www.islambook.com/azkar/22/أذكار-الصلاة",
+    "asset": "assets/categories/22.json",
+    "count": 11
+  },
+  {
+    "id": 20,
+    "key": "comprehensiveDua",
+    "title": "جوامع الدعاء",
+    "url": "https://www.islambook.com/azkar/20/جوامع-الدعاء",
+    "asset": "assets/categories/20.json",
+    "count": 34
+  },
+  {
+    "id": 21,
+    "key": "propheticDua",
+    "title": "أدعية نبوية",
+    "url": "https://www.islambook.com/azkar/21/أدعية-النبي-صلى-الله-عليه-وسلم",
+    "asset": "assets/categories/21.json",
+    "count": 29
+  },
+  {
+    "id": 15,
+    "key": "quranicDua",
+    "title": "الأدعية القرآنية",
+    "url": "https://www.islambook.com/azkar/15/الأدعية-القرآنية",
+    "asset": "assets/categories/15.json",
+    "count": 26
+  },
+  {
+    "id": 28,
+    "key": "prophetsDua",
+    "title": "أدعية الأنبياء",
+    "url": "https://www.islambook.com/azkar/28/أدعية-الأنبياء-من-القرآن-الكريم",
+    "asset": "assets/categories/28.json",
+    "count": 13
+  },
+  {
+    "id": 14,
+    "key": "miscellaneous",
+    "title": "أذكار متفرقة",
+    "url": "https://www.islambook.com/azkar/14/أذكار-متفرقة",
+    "asset": "assets/categories/14.json",
+    "count": 42
+  },
+  {
+    "id": 5,
+    "key": "adhan",
+    "title": "أذكار الآذان",
+    "url": "https://www.islambook.com/azkar/5/أذكار-عند-سماع-الآذان",
+    "asset": "assets/categories/5.json",
+    "count": 9
+  },
+  {
+    "id": 6,
+    "key": "mosque",
+    "title": "أذكار المسجد",
+    "url": "https://www.islambook.com/azkar/6/أذكار-المسجد",
+    "asset": "assets/categories/6.json",
+    "count": 3
+  },
+  {
+    "id": 10,
+    "key": "ablution",
+    "title": "أذكار الوضوء",
+    "url": "https://www.islambook.com/azkar/10/أذكار-الوضوء",
+    "asset": "assets/categories/10.json",
+    "count": 2
+  },
+  {
+    "id": 4,
+    "key": "home",
+    "title": "أذكار المنزل",
+    "url": "https://www.islambook.com/azkar/4/أذكار-دخول-وخروج-المنزل",
+    "asset": "assets/categories/4.json",
+    "count": 2
+  },
+  {
+    "id": 7,
+    "key": "toilet",
+    "title": "أذكار الخلاء",
+    "url": "https://www.islambook.com/azkar/7/أذكار-دخول-وخروج-الخلاء",
+    "asset": "assets/categories/7.json",
+    "count": 2
+  },
+  {
+    "id": 13,
+    "key": "food",
+    "title": "أذكار الطعام",
+    "url": "https://www.islambook.com/azkar/13/أذكار-الطعام-والشراب-والضيف",
+    "asset": "assets/categories/13.json",
+    "count": 5
+  },
+  {
+    "id": 17,
+    "key": "hajjUmrah",
+    "title": "أذكار الحج والعمرة",
+    "url": "https://www.islambook.com/azkar/17/أذكار-الحج-والعمرة",
+    "asset": "assets/categories/17.json",
+    "count": 2
+  },
+  {
+    "id": 16,
+    "key": "quranCompletion",
+    "title": "دعاء ختم القرآن الكريم",
+    "url": "https://www.islambook.com/azkar/16/دعاء-ختم-القرآن-الكريم",
+    "asset": "assets/categories/16.json",
+    "count": 1
+  },
+  {
+    "id": 18,
+    "key": "duaMerit",
+    "title": "فضل الدعاء",
+    "url": "https://www.islambook.com/azkar/18/فضل-الدعاء",
+    "asset": "assets/categories/18.json",
+    "count": 1
+  },
+  {
+    "id": 19,
+    "key": "dhikrMerit",
+    "title": "فضل الذكر",
+    "url": "https://www.islambook.com/azkar/19/فضل-الذكر",
+    "asset": "assets/categories/19.json",
+    "count": 1
+  },
+  {
+    "id": 24,
+    "key": "surahMerit",
+    "title": "فضل السور",
+    "url": "https://www.islambook.com/azkar/24/فضائل-السور",
+    "asset": "assets/categories/24.json",
+    "count": 12
+  },
+  {
+    "id": 23,
+    "key": "quranMerit",
+    "title": "فضل القرآن",
+    "url": "https://www.islambook.com/azkar/23/فضائل-القرآن",
+    "asset": "assets/categories/23.json",
+    "count": 3
+  },
+  {
+    "id": 25,
+    "key": "namesOfAllah",
+    "title": "أسماء الله الحسنى",
+    "url": "https://www.islambook.com/azkar/25/أسماء-الله-الحسنى",
+    "asset": "assets/categories/25.json",
+    "count": 2
+  },
+  {
+    "id": 27,
+    "key": "deceased",
+    "title": "أدعية للميّت",
+    "url": "https://www.islambook.com/azkar/27/أدعية-للميت",
+    "asset": "assets/categories/27.json",
+    "count": 4
+  },
+  {
+    "id": 26,
+    "key": "ruqyah",
+    "title": "الرُّقية الشرعية",
+    "url": "https://www.islambook.com/azkar/26/الرقية-الشرعية-من-القرآن-والسنة",
+    "asset": "assets/categories/26.json",
+    "count": 3
+  }
+]
