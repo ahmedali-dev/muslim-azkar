@@ -2,7 +2,8 @@
 
 - The reader’s “النص” label is reduced to 11 sp; zikr body font settings and
   the counter size are unchanged.
-- GitHub Actions workflows and the static Arabic landing page are prepared.
+- GitHub Actions workflows pass actionlint. The static Arabic landing page
+  passes checks for local assets, fonts, anchors, and release download links.
   Repository creation, remote workflow results, and public deployment must be
   verified separately after publication is authorized.
 - Selected themes are **سكينة** for light mode and **ليل** for dark mode,
@@ -44,14 +45,15 @@
   short/narrow layouts, 200% accessibility text, and reminder-permission branches.
 - Reminder isolation test confirms that additional categories do not inherit the
   evening reminder. Existing notification IDs and payloads remain unchanged.
-- Android integration test: **passed** on the ARM64 Android **17 / API 37**
+- Android integration test on the preceding 1.4.0 feature build: **passed** on the ARM64 Android **17 / API 37**
   emulator with 16 KB pages. Verified the morning counter/automatic advance,
   Settings, all 27 library categories, Arabic search, opening Food Azkar, and
   counter/automatic advance in that additional section.
 - Native Android screenshots were captured and visually inspected:
   `screenshots/home.png`, `morning.png`, `settings.png`, `categories.png`, `food.png`, `home_dark.png`, `categories_dark.png`, `evening_dark.png`, `share_preview_light.png`, `share_preview_dark.png`, `share_light.png`, `share_dark.png`, `android_share_sheet.png`.
-- Release split APK and app-bundle commands build successfully. The final ARM64
-  release APK is separately installed/launched from its built binary.
+- Version 1.4.1 release split APKs and app bundle build successfully. The
+  preceding 1.4.0 feature APK was separately installed/launched; this label-only
+  patch was checked with the analyzer, all 16 tests, and release builds.
 - All three release APKs are checked against **15,000,000 bytes**. Exact sizes
   and SHA-256 hashes are in `deliverables/build_manifest.json`; archive/binary
   checksums are in `deliverables/SHA256SUMS.txt`.
