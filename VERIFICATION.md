@@ -4,8 +4,21 @@
   the counter size are unchanged.
 - GitHub Actions workflows pass actionlint. The static Arabic landing page
   passes checks for local assets, fonts, anchors, and release download links.
-  Repository creation, remote workflow results, and public deployment must be
-  verified separately after publication is authorized.
+- Public repository: https://github.com/ahmedali-dev/muslim-azkar
+- GitHub main build passed: https://github.com/ahmedali-dev/muslim-azkar/actions/runs/42080430505
+- Tag build and automatic release passed all three jobs (verify, android, release):
+  https://github.com/ahmedali-dev/muslim-azkar/actions/runs/42081832563
+- GitHub Pages deployment passed:
+  https://github.com/ahmedali-dev/muslim-azkar/actions/runs/42080430502
+- Published landing page: https://ahmedali-dev.github.io/muslim-azkar/ . Browser
+  checks passed at 685 px and 390 px widths with all images loaded and no
+  horizontal overflow. The page and its latest-APK link return HTTP 200.
+- Release v1.4.1 contains three APKs, the AAB, a build manifest, and checksums.
+  The downloaded ARM64 APK is **9,293,496 bytes**; its SHA-256 matches the
+  published checksums and its signing certificate matches the tracked public
+  fingerprint. It retains minSdk 23 and has no Internet permission.
+- The app's dedicated signing key is in encrypted repository Actions secrets.
+  Its local backup is ignored by Git. No private key or password is published.
 - Selected themes are **سكينة** for light mode and **ليل** for dark mode,
   following the user's HTML design selections. Home cards, reading surfaces,
   navigation, Settings, and category library use matching colours.
