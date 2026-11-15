@@ -5,7 +5,7 @@ full Quran reader. Azkar work fully offline. The Quran text is downloaded once
 from AlQuran Cloud and cached locally for subsequent offline reading. Includes
 RTL Material 3, bundled Arabic fonts, daily saved progress, themes, and reminders.
 
-Version **1.5.0** applies the selected **سكينة (Sakina)** design to light mode
+Version **1.6.0** applies the selected **سكينة (Sakina)** design to light mode
 and **ليل (Layl)** to dark mode. Sakina uses sage-green featured cards, white
 reading surfaces, and a compact tasbih-bead counter. Layl uses deep teal surfaces,
 soft green highlights, and a moon-orbit counter. System theme mode automatically
@@ -49,8 +49,8 @@ update automatically when a new version is published.
 
 ```sh
 # Bump pubspec.yaml first, then publish a matching tag.
-git tag v1.5.0
-git push origin v1.5.0
+git tag v1.6.0
+git push origin v1.6.0
 ```
 
 Workflow references: [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages),

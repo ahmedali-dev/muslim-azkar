@@ -30,7 +30,8 @@ class QuranRepository {
     final file = await _cacheFile();
     if (!await file.exists()) return null;
     try {
-      final json = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+      final json =
+          jsonDecode(await file.readAsString()) as Map<String, dynamic>;
       return QuranData.fromApiResponse(json);
     } catch (_) {
       try {

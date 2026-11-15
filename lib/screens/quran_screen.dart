@@ -84,7 +84,7 @@ class _QuranScreenState extends State<QuranScreen> {
         if (data != null) {
           _currentAyahNumber = _currentAyahNumber.clamp(1, data.ayahs.length);
         }
-        final ayah = data == null ? null : data.ayah(_currentAyahNumber);
+        final ayah = data?.ayah(_currentAyahNumber);
         final design = app.settings.quranReaderDesign;
         return Scaffold(
           appBar: AppBar(
@@ -252,52 +252,55 @@ class _QuranScreenState extends State<QuranScreen> {
         final visibleAyah = data.ayahs[index];
         final surah = data.surah(visibleAyah.surahNumber);
         return ListView(
-      key: const ValueKey('quran-ayah-design'),
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-      children: [
-        _surahHeading(surah, visibleAyah),
-        const SizedBox(height: 16),
-        GlassCard(
-          reading: true,
-          margin: EdgeInsets.zero,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
-            child: Column(
-              children: [
-                Text(
-                  'آية ${visibleAyah.numberInSurah}',
-                  style: TextStyle(color: colors.primary, fontSize: 13),
+          key: const ValueKey('quran-ayah-design'),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          children: [
+            _surahHeading(surah, visibleAyah),
+            const SizedBox(height: 16),
+            GlassCard(
+              reading: true,
+              margin: EdgeInsets.zero,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                  vertical: 28,
                 ),
-                const SizedBox(height: 20),
-                SelectableText(
-                  visibleAyah.text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Amiri',
-                    fontSize: fontSize,
-                    height: 2,
-                    color: colors.onSurface,
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      'آية ${visibleAyah.numberInSurah}',
+                      style: TextStyle(color: colors.primary, fontSize: 13),
+                    ),
+                    const SizedBox(height: 20),
+                    SelectableText(
+                      visibleAyah.text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Amiri',
+                        fontSize: fontSize,
+                        height: 2,
+                        color: colors.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'الجزء ${visibleAyah.juz} · الصفحة ${visibleAyah.page}',
+                      style: TextStyle(
+                        color: colors.onSurfaceVariant,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  'الجزء ${visibleAyah.juz} · الصفحة ${visibleAyah.page}',
-                  style: TextStyle(
-                    color: colors.onSurfaceVariant,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'اسحب يمينًا أو يسارًا للانتقال بين الآيات.',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: colors.onSurfaceVariant, fontSize: 12),
-        ),
-      ],
+            const SizedBox(height: 12),
+            Text(
+              'اسحب يمينًا أو يسارًا للانتقال بين الآيات.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: colors.onSurfaceVariant, fontSize: 12),
+            ),
+          ],
         );
       },
     );
@@ -600,11 +603,13 @@ class _QuranSurahPickerState extends State<QuranSurahPicker> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final query = _search.text.trim();
-    final surahs = widget.surahs.where((surah) {
-      return query.isEmpty ||
-          surah.name.contains(query) ||
-          surah.englishName.toLowerCase().contains(query.toLowerCase());
-    }).toList(growable: false);
+    final surahs = widget.surahs
+        .where((surah) {
+          return query.isEmpty ||
+              surah.name.contains(query) ||
+              surah.englishName.toLowerCase().contains(query.toLowerCase());
+        })
+        .toList(growable: false);
     return Container(
       height: MediaQuery.sizeOf(context).height * .8,
       decoration: BoxDecoration(
@@ -622,7 +627,10 @@ class _QuranSurahPickerState extends State<QuranSurahPicker> {
                   const Expanded(
                     child: Text(
                       'اختر السورة',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   IconButton(
@@ -658,7 +666,9 @@ class _QuranSurahPickerState extends State<QuranSurahPicker> {
                       radius: 18,
                       backgroundColor: colors.primaryContainer,
                       foregroundColor: colors.primary,
-                      child: Text(_QuranScreenState._arabicDigits(surah.number)),
+                      child: Text(
+                        _QuranScreenState._arabicDigits(surah.number),
+                      ),
                     ),
                     title: Text(surah.name),
                     subtitle: Text('${surah.numberOfAyahs} آيات'),

@@ -29,7 +29,7 @@ class AboutScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              const Text('الإصدار ١.٥.٠', textAlign: TextAlign.center),
+              const Text('الإصدار ١.٦.٠', textAlign: TextAlign.center),
               const SizedBox(height: 28),
               const Text(
                 'رفيقك للأذكار والأدعية في ٢٧ قسمًا، مع القرآن الكريم. تعمل الأذكار دون إنترنت، ويُحمّل نص القرآن كاملًا عند أول فتح ثم يُحفظ للقراءة دون اتصال.\n'
@@ -86,7 +86,7 @@ class AboutScreen extends StatelessWidget {
                 onPressed: () => showLicensePage(
                   context: context,
                   applicationName: 'أذكار المسلم',
-                  applicationVersion: '١.٥.٠',
+                  applicationVersion: '١.٦.٠',
                 ),
                 child: const Text('تراخيص البرمجيات'),
               ),

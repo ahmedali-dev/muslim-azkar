@@ -102,7 +102,9 @@ class QuranData {
       throw const FormatException('لم تكتمل قائمة سور القرآن.');
     }
     final surahs = List<QuranSurah>.unmodifiable(
-      rawSurahs.map((surah) => QuranSurah.fromJson(surah as Map<String, dynamic>)),
+      rawSurahs.map(
+        (surah) => QuranSurah.fromJson(surah as Map<String, dynamic>),
+      ),
     );
     for (var i = 0; i < surahs.length; i++) {
       final surah = surahs[i];
@@ -135,8 +137,10 @@ class QuranData {
       pagesFound.add(ayah.page);
     }
     if (pagesFound.length != pageCount ||
-        List.generate(pageCount, (index) => index + 1)
-            .any((page) => !pagesFound.contains(page))) {
+        List.generate(
+          pageCount,
+          (index) => index + 1,
+        ).any((page) => !pagesFound.contains(page))) {
       throw const FormatException('ترقيم صفحات القرآن غير مكتمل.');
     }
     return QuranData(surahs: surahs, ayahs: ayahs);
