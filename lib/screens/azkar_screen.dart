@@ -27,9 +27,14 @@ class _AzkarScreenState extends State<AzkarScreen> {
   bool _advancing = false;
   final Set<int> _shownEncouragements = {};
   static const _encouragements = <int, String>{
-    25: 'أحسنت، كل ذكر تقرؤه يقرّبك من إتمام وردك.',
-    50: 'بلغت منتصف الطريق، واصل بقلب حاضر.',
-    75: 'لم يبقَ إلا القليل، اجعل ختام وردك أجمل.',
+    25: 'كلّ خطوة تقرّبك من إتمام وردك.',
+    50: 'واصل على مهل، فأجمل الورد ما حضر فيه القلب.',
+    75: 'خذ لحظة هدوء، ثم أكمل ما بقي بقلب مطمئن.',
+  };
+  static const _encouragementTitles = <int, String>{
+    25: 'أحسنت، بدأت الطريق',
+    50: 'ما شاء الله، أنجزت نصف الورد',
+    75: 'لم يبقَ إلا القليل',
   };
   @override
   void initState() {
@@ -67,8 +72,8 @@ class _AzkarScreenState extends State<AzkarScreen> {
     }
     _review = false;
     final finished = state.tap(widget.period, z);
-    _showEncouragement(previousProgress, state.fraction(widget.period));
-    if (!finished) return;
+    await _showEncouragement(previousProgress, state.fraction(widget.period));
+    if (!mounted || !finished) return;
     _advancing = true;
     final current = _index;
     final day = state.progress.day;
@@ -96,7 +101,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
     if (mounted) setState(() => _advancing = false);
   }
 
-  void _showEncouragement(double before, double after) {
+  Future<void> _showEncouragement(double before, double after) async {
     final milestone = _encouragements.keys.firstWhere(
       (value) =>
           before < value / 100 &&
@@ -106,29 +111,111 @@ class _AzkarScreenState extends State<AzkarScreen> {
     );
     if (milestone == 0 || !mounted) return;
     _shownEncouragements.add(milestone);
-    final messenger = ScaffoldMessenger.of(context);
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 3),
-        content: Row(
-          children: [
-            Icon(
-              Icons.auto_awesome_rounded,
-              color: Theme.of(context).colorScheme.onInverseSurface,
+    await showModalBottomSheet<void>(
+      context: context,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withValues(alpha: .2),
+      builder: (sheetContext) {
+        final theme = Theme.of(sheetContext);
+        final colors = theme.colorScheme;
+        return Container(
+          decoration: BoxDecoration(
+            color: colors.surface,
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(22),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                _encouragements[milestone]!,
-                textAlign: TextAlign.start,
-                style: const TextStyle(height: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: .12),
+                blurRadius: 25,
+                offset: const Offset(0, -8),
+              ),
+            ],
+          ),
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 34,
+                      height: 3,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: colors.outlineVariant,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: colors.primaryContainer,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Icon(
+                          Icons.favorite_rounded,
+                          color: colors.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _encouragementTitles[milestone]!,
+                              style: TextStyle(
+                                color: colors.primary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              _encouragements[milestone]!,
+                              style: TextStyle(
+                                color: colors.onSurface,
+                                fontSize: 15,
+                                height: 1.65,
+                              ),
+                            ),
+                            const SizedBox(height: 7),
+                            Text(
+                              'رسالة تشجيع · تقدّم $milestone٪',
+                              style: TextStyle(
+                                color: colors.onSurfaceVariant,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: TextButton.icon(
+                      onPressed: () => Navigator.pop(sheetContext),
+                      icon: const Icon(Icons.arrow_back_rounded),
+                      label: const Text('متابعة الذكر'),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -141,6 +228,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
     if (_day != state.progress.day) {
       _day = state.progress.day;
       _review = false;
+      _shownEncouragements.clear();
       _index = 0;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted && _controller.hasClients) _controller.jumpToPage(0);
@@ -462,7 +550,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       onReview: () => _returnToStart(true),
                       onRestart: () {
                         state.restart(widget.period);
-        _shownEncouragements.clear();
+                        _shownEncouragements.clear();
                         _returnToStart(false);
                       },
                     ),

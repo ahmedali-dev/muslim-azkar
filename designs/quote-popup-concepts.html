@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>ثلاثة تصاميم لرسائل التشجيع — أذكار المسلم</title>
+  <style>
+    :root {
+      font-family: Tajawal, Cairo, "Noto Sans Arabic", system-ui, sans-serif;
+      color: #23332f;
+      background: #f3f3ed;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --page: #f3f3ed;
+      --surface: #fffefa;
+      --screen: #f7f5ef;
+      --ink: #23332f;
+      --muted: #78847e;
+      --line: #e5e8df;
+      --green: #1f7a6d;
+      --green-soft: #e7f4ed;
+      --accent: #c68f55;
+      --shadow: 0 22px 55px #28352c12, 0 3px 10px #28352c08;
+    }
+    * { box-sizing: border-box; }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --page: #101a18;
+      --surface: #182421;
+      --screen: #121816;
+      --ink: #e8efec;
+      --muted: #9aa9a2;
+      --line: #2a3934;
+      --green: #86c9b5;
+      --green-soft: #203c34;
+      --accent: #ddba82;
+      --shadow: 0 22px 55px #0005, 0 3px 10px #0003;
+    }
+    body { margin: 0; min-width: 320px; background: var(--page); color: var(--ink); transition: background .25s, color .25s; }
+    button { font: inherit; }
+    .wrap { max-width: 1280px; margin: auto; padding: 42px 24px 56px; }
+    .topline { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--green); font-weight: 800; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 14px; background: var(--green-soft); font-size: 20px; }
+    .theme-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); cursor: pointer; }
+    .intro { max-width: 700px; margin: 0 auto 30px; text-align: center; }
+    .eyebrow { color: var(--green); font-size: 13px; font-weight: 800; letter-spacing: .03em; }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 42px); line-height: 1.35; letter-spacing: -.035em; }
+    .intro p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+    .designs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+    .design { overflow: hidden; border: 1px solid var(--line); border-radius: 25px; background: var(--surface); box-shadow: var(--shadow); transition: transform .2s, border-color .2s; }
+    .design:hover { transform: translateY(-3px); }
+    .design.selected { border-color: var(--green); box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 18%, transparent), var(--shadow); }
+    .design-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 18px 13px; }
+    .design-num { color: var(--green); font-size: 12px; font-weight: 800; }
+    .design h2 { margin: 3px 0 4px; font-size: 20px; }
+    .design-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .selected-label { display: none; white-space: nowrap; padding: 5px 9px; border-radius: 99px; color: var(--green); background: var(--green-soft); font-size: 11px; font-weight: 800; }
+    .selected .selected-label { display: inline-block; }
+    .phone-wrap { display: flex; justify-content: center; padding: 4px 13px 14px; }
+    .phone { position: relative; width: 100%; max-width: 310px; height: 445px; overflow: hidden; border: 7px solid #222a27; border-radius: 31px; background: var(--screen); box-shadow: 0 12px 30px #1c29231f; }
+    .phone:before { content: ""; position: absolute; z-index: 4; width: 62px; height: 17px; top: 0; left: 50%; transform: translateX(-50%); border-radius: 0 0 12px 12px; background: #222a27; }
+    .status { height: 29px; display: flex; justify-content: space-between; padding: 7px 13px 0; font-size: 9px; font-weight: 700; direction: ltr; color: var(--muted); }
+    .reader-head { display: flex; align-items: center; justify-content: space-between; margin: 2px 14px 14px; padding: 0 0 10px; background: var(--screen); border-bottom: 1px solid var(--line); }
+    .reader-head strong { font-size: 14px; }
+    .reader-head span { color: var(--muted); font-size: 10px; }
+    .progress { height: 4px; margin: 0 15px; overflow: hidden; border-radius: 9px; background: var(--line); }
+    .progress i { display: block; width: 51%; height: 100%; border-radius: inherit; background: var(--green); }
+    .page-num { margin: 9px 15px; color: var(--muted); font-size: 9px; }
+    .zikr { margin: 15px 12px 0; min-height: 134px; display: grid; place-content: center; padding: 17px; border: 1px solid var(--line); border-radius: 19px; background: var(--surface); text-align: center; }
+    .zikr small { color: var(--green); font-size: 9px; }
+    .zikr p { margin: 10px 0 0; font-family: Amiri, "Noto Naskh Arabic", Georgia, serif; font-size: 20px; line-height: 1.9; }
+    .counter { display: grid; place-items: center; width: 79px; height: 79px; margin: 18px auto 0; border: 5px solid color-mix(in srgb, var(--green) 18%, transparent); border-radius: 50%; color: var(--green); font-size: 25px; font-weight: 800; }
+    .hint { margin: 8px 0; color: var(--muted); text-align: center; font-size: 9px; }
+    .quote { color: var(--ink); }
+    /* Option one: a small, familiar transient message. */
+    .toast { position: absolute; z-index: 2; right: 9px; bottom: 13px; left: 9px; display: flex; gap: 10px; align-items: center; padding: 11px 12px; border: 1px solid color-mix(in srgb, var(--green) 20%, var(--line)); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 24px #0c21172b; animation: arrive .45s ease-out both; }
+    .toast .symbol, .float-icon, .sheet-icon { flex: 0 0 auto; display: grid; place-items: center; width: 31px; height: 31px; border-radius: 11px; background: var(--green-soft); color: var(--green); font-size: 15px; }
+    .toast strong, .float-copy strong, .sheet-copy strong { display: block; margin-bottom: 2px; color: var(--green); font-size: 10px; }
+    .toast p { margin: 0; font-size: 11px; line-height: 1.55; }
+    .toast .dismiss { margin-inline-start: auto; align-self: flex-start; color: var(--muted); font-size: 15px; }
+    /* Option two: a richer floating card with a progress accent. */
+    .float-card { position: absolute; z-index: 2; right: 10px; bottom: 13px; left: 10px; padding: 12px; border: 1px solid color-mix(in srgb, var(--green) 18%, var(--line)); border-radius: 19px; background: var(--surface); box-shadow: 0 10px 28px #0c21172b; animation: arrive .45s ease-out both; }
+    .float-top { display: flex; align-items: center; gap: 9px; }
+    .float-copy { flex: 1; }
+    .float-copy p { margin: 0; font-size: 11px; line-height: 1.65; }
+    .percent { color: var(--green); font-size: 10px; font-weight: 800; }
+    .float-track { height: 3px; margin-top: 10px; border-radius: 9px; background: var(--line); }
+    .float-track i { display: block; width: 51%; height: 100%; border-radius: inherit; background: var(--green); }
+    /* Option three: a shallow sheet that gives the message a little more room. */
+    .sheet-backdrop { position: absolute; z-index: 1; inset: 0; background: #09130d16; }
+    .sheet { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; padding: 11px 15px 15px; border-radius: 22px 22px 0 0; background: var(--surface); box-shadow: 0 -8px 25px #0c21171b; animation: rise .42s ease-out both; }
+    .sheet-handle { width: 33px; height: 3px; margin: 0 auto 10px; border-radius: 5px; background: var(--line); }
+    .sheet-row { display: flex; align-items: flex-start; gap: 9px; }
+    .sheet-copy { flex: 1; }
+    .sheet-copy p { margin: 0; font-size: 12px; line-height: 1.7; }
+    .sheet-note { margin-top: 8px; color: var(--muted); font-size: 9px; }
+    .sheet-action { display: block; margin: 8px 0 0 auto; padding: 4px 0; border: 0; background: transparent; color: var(--green); font-size: 11px; font-weight: 800; cursor: pointer; }
+    .design-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px 15px; border-top: 1px solid var(--line); }
+    .design-foot span { color: var(--muted); font-size: 12px; }
+    .choose { min-height: 40px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 13px; background: transparent; color: var(--ink); font-size: 12px; font-weight: 700; cursor: pointer; transition: .2s; }
+    .choose:hover, .choose:focus-visible { border-color: var(--green); color: var(--green); outline: 2px solid color-mix(in srgb, var(--green) 20%, transparent); outline-offset: 2px; }
+    .selected .choose { border-color: var(--green); background: var(--green); color: #fff; }
+    .page-foot { margin-top: 20px; text-align: center; color: var(--muted); font-size: 12px; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes rise { from { opacity: .6; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 940px) { .designs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 620px) { .wrap { padding: 22px 14px 34px; } .topline { margin-bottom: 26px; } .intro { margin-bottom: 24px; } .designs { grid-template-columns: 1fr; gap: 14px; max-width: 390px; margin-inline: auto; } .phone { max-width: 330px; height: 455px; } .page-foot { max-width: 340px; margin: 18px auto 0; line-height: 1.7; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topline">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>أذكار المسلم</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeText">سكينة · فاتح</span></button>
+    </div>
+    <header class="intro">
+      <div class="eyebrow">رسائل خفيفة في طريق الورد</div>
+      <h1>ثلاثة تصاميم… وتشجيع واحد</h1>
+      <p>اختر الطريقة التي تظهر بها كلمات التشجيع أثناء قراءة الأذكار. بدّل بين سكينة وليل لمعاينة المظهرين.</p>
+    </header>
+
+    <section class="designs" aria-label="تصاميم رسائل التشجيع">
+      <article class="design" data-design="toast">
+        <header class="design-head"><div><div class="design-num">التصميم ٠١ · سريع وهادئ</div><h2>خاطرة</h2><p>تنبيه صغير أسفل الشاشة، يمرّ بلطف ثم يتركك تكمل.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة قارئ الأذكار مع تنبيه خاطرة">
+          <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+          <div class="reader-head"><strong>أذكار الصباح</strong><span>٣ / ٢٥</span></div>
+          <div class="progress"><i></i></div><div class="page-num">أتممت نصف وردك اليوم</div>
+          <div class="zikr"><small>النص ٣</small><p>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ</p></div>
+          <div class="counter">٩</div><div class="hint">اضغط مع كل تكرار</div>
+          <div class="toast quote"><span class="symbol" aria-hidden="true">✦</span><div><strong>أحسنت، واصل</strong><p>كلّ خطوة تقرّبك من إتمام وردك.</p></div><span class="dismiss" aria-hidden="true">×</span></div>
+        </div></div>
+        <footer class="design-foot"><span>الأخف على مساحة القراءة</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+
+      <article class="design" data-design="float">
+        <header class="design-head"><div><div class="design-num">التصميم ٠٢ · احتفاء بالتقدم</div><h2>رفيق</h2><p>بطاقة عائمة تجمع عبارة دافئة مع نسبة إنجازك.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة قارئ الأذكار مع بطاقة رفيق">
+          <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+          <div class="reader-head"><strong>أذكار الصباح</strong><span>٣ / ٢٥</span></div>
+          <div class="progress"><i></i></div><div class="page-num">أتممت نصف وردك اليوم</div>
+          <div class="zikr"><small>النص ٣</small><p>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ</p></div>
+          <div class="counter">٩</div><div class="hint">اضغط مع كل تكرار</div>
+          <div class="float-card quote"><div class="float-top"><span class="float-icon" aria-hidden="true">❋</span><div class="float-copy"><strong>بلغت منتصف الطريق</strong><p>واصل على مهل، فأجمل الورد ما حضر فيه القلب.</p></div><span class="percent">٥٠٪</span></div><div class="float-track"><i></i></div></div>
+        </div></div>
+        <footer class="design-foot"><span>يوضح الإنجاز بلمحة</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+
+      <article class="design selected" data-design="sheet">
+        <header class="design-head"><div><div class="design-num">التصميم ٠٣ · لحظة أهدأ</div><h2>خطوة</h2><p>مساحة قصيرة للرسالة، مع دعوة بسيطة للعودة للذكر.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة قارئ الأذكار مع نافذة خطوة">
+          <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+          <div class="reader-head"><strong>أذكار الصباح</strong><span>٣ / ٢٥</span></div>
+          <div class="progress"><i></i></div><div class="page-num">أتممت نصف وردك اليوم</div>
+          <div class="zikr"><small>النص ٣</small><p>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ</p></div>
+          <div class="counter">٩</div><div class="hint">اضغط مع كل تكرار</div>
+          <div class="sheet-backdrop"></div><div class="sheet quote"><div class="sheet-handle"></div><div class="sheet-row"><span class="sheet-icon" aria-hidden="true">♡</span><div class="sheet-copy"><strong>ما شاء الله، أنجزت نصف الورد</strong><p>خذ لحظة هدوء، ثم أكمل ما بقي بقلب مطمئن.</p><div class="sheet-note">رسالة تشجيع · تظهر عند منتصف التقدم</div></div></div><button class="sheet-action" type="button">متابعة الذكر ←</button></div>
+        </div></div>
+        <footer class="design-foot"><span>رسالة أوضح ومساحة أوسع</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+    </section>
+    <footer class="page-foot" id="selection" aria-live="polite">التصميم المختار: خطوة · يمكنك تغيير الاختيار في أي وقت.</footer>
+  </main>
+  <script>
+    const root = document.documentElement;
+    const themeButton = document.getElementById('themeToggle');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+    themeButton.addEventListener('click', () => {
+      const dark = root.dataset.theme !== 'dark';
+      root.dataset.theme = dark ? 'dark' : 'light';
+      themeButton.setAttribute('aria-pressed', String(dark));
+      themeText.textContent = dark ? 'ليل · داكن' : 'سكينة · فاتح';
+      themeIcon.textContent = dark ? '☾' : '☼';
+    });
+    const names = { toast: 'خاطرة', float: 'رفيق', sheet: 'خطوة' };
+    const cards = [...document.querySelectorAll('.design')];
+    const selection = document.getElementById('selection');
+    cards.forEach((card) => {
+      card.querySelector('.choose').addEventListener('click', () => {
+        cards.forEach((item) => item.classList.toggle('selected', item === card));
+        selection.textContent = `التصميم المختار: ${names[card.dataset.design]} · يمكنك تغيير الاختيار في أي وقت.`;
+      });
+    });
+  </script>
+</body>
+</html>
