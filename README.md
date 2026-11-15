@@ -1,10 +1,11 @@
 # Muslim Azkar · أذكار المسلم
 
-Arabic-only, fully offline Flutter Android app with **27 categories / 315 entries**:
-RTL Material 3, bundled Arabic fonts, daily saved progress, reading counters,
-copy/share, Arabic category search, themes, font sizes, and morning/evening reminders.
+Arabic-only Flutter Android app with **27 azkar categories / 315 entries** and a
+full Quran reader. Azkar work fully offline. The Quran text is downloaded once
+from AlQuran Cloud and cached locally for subsequent offline reading. Includes
+RTL Material 3, bundled Arabic fonts, daily saved progress, themes, and reminders.
 
-Version **1.4.1** applies the selected **سكينة (Sakina)** design to light mode
+Version **1.5.0** applies the selected **سكينة (Sakina)** design to light mode
 and **ليل (Layl)** to dark mode. Sakina uses sage-green featured cards, white
 reading surfaces, and a compact tasbih-bead counter. Layl uses deep teal surfaces,
 soft green highlights, and a moon-orbit counter. System theme mode automatically
@@ -48,8 +49,8 @@ update automatically when a new version is published.
 
 ```sh
 # Bump pubspec.yaml first, then publish a matching tag.
-git tag v1.4.1
-git push origin v1.4.1
+git tag v1.5.0
+git push origin v1.5.0
 ```
 
 Workflow references: [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages),
@@ -74,8 +75,9 @@ depend on the installed receiving apps.
 
 Use **Flutter 3.32.8 / Dart 3.8.1** (`.fvmrc`), JDK 17, Android SDK platform 36,
 command-line tools, and NDK 27.0.12077973. This Flutter version retains support
-for Android 6; the app minimum is **API 23**. Development needs dependency
-access; the installed release app has **no Internet permission**.
+for Android 6; the app minimum is **API 23**. Internet permission is used only
+to fetch the Quran text from AlQuran Cloud on first open or manual refresh; its
+verified response is cached for offline reading. No other network content is loaded.
 
 ```sh
 flutter pub get

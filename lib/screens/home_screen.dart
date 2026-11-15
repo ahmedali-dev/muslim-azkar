@@ -8,6 +8,7 @@ import 'about_screen.dart';
 import 'categories_screen.dart';
 import 'azkar_screen.dart';
 import 'settings_screen.dart';
+import 'quran_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,6 +21,10 @@ class HomeScreen extends StatelessWidget {
     void library() => Navigator.push(
       context,
       MaterialPageRoute<void>(builder: (_) => const CategoriesScreen()),
+    );
+    void quran() => Navigator.push(
+      context,
+      MaterialPageRoute<void>(builder: (_) => const QuranScreen()),
     );
     Widget card(AzkarPeriod period, {required bool featured}) => PeriodCard(
       period: period,
@@ -65,6 +70,7 @@ class HomeScreen extends StatelessWidget {
         selectedIndex: 0,
         onDestinationSelected: (index) {
           if (index == 1) library();
+          if (index == 2) quran();
         },
         destinations: const [
           NavigationDestination(
@@ -75,6 +81,11 @@ class HomeScreen extends StatelessWidget {
           NavigationDestination(
             icon: Icon(Icons.menu_book_rounded),
             label: 'الأذكار',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.auto_stories_outlined),
+            selectedIcon: Icon(Icons.auto_stories_rounded),
+            label: 'القرآن',
           ),
         ],
       ),
@@ -150,6 +161,31 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 20),
+                GlassCard(
+                  margin: EdgeInsets.zero,
+                  child: ListTile(
+                    key: const ValueKey('openQuranReader'),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 17,
+                      vertical: 7,
+                    ),
+                    leading: Icon(
+                      Icons.auto_stories_rounded,
+                      color: theme.colorScheme.primary,
+                    ),
+                    title: const Text(
+                      'قراءة القرآن الكريم',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: const Text(
+                      '١١٤ سورة · ٦٠٤ صفحات · يُحفظ للقراءة دون اتصال',
+                      style: TextStyle(fontSize: 12, height: 1.5),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_rounded, size: 20),
+                    onTap: quran,
+                  ),
+                ),
+                const SizedBox(height: 12),
                 GlassCard(
                   margin: EdgeInsets.zero,
                   child: ListTile(

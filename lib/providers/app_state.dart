@@ -11,6 +11,7 @@ class AppState extends ChangeNotifier {
     : _clock = clock ?? DateTime.now {
     settings = _readSettings();
     progress = _readProgress();
+    quranLastAyahNumber = _readQuranPosition();
     ensureToday();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       ensureToday();
@@ -27,6 +28,7 @@ class AppState extends ChangeNotifier {
   late final Timer _timer;
   late AppSettings settings;
   late DailyProgress progress;
+  late int quranLastAyahNumber;
   int _lastMinute = -1;
   Future<void> _pendingWrite = Future.value();
   String? storageError;
@@ -55,6 +57,17 @@ class AppState extends ChangeNotifier {
       );
     } catch (_) {
       return DailyProgress(dayKey(now));
+    }
+  }
+
+  int _readQuranPosition() {
+    try {
+      final value =
+          jsonDecode(prefs.getString('quran_position') ?? '{}')
+              as Map<String, dynamic>;
+      return ((value['ayah'] as int?) ?? 1).clamp(1, 6236);
+    } catch (_) {
+      return 1;
     }
   }
 
@@ -112,6 +125,14 @@ class AppState extends ChangeNotifier {
       progress.reset(p, z);
     }
     _saveProgress();
+    notifyListeners();
+  }
+
+  void saveQuranPosition(int ayahNumber) {
+    final value = ayahNumber.clamp(1, 6236);
+    if (value == quranLastAyahNumber) return;
+    quranLastAyahNumber = value;
+    _save('quran_position', jsonEncode({'ayah': value}));
     notifyListeners();
   }
 

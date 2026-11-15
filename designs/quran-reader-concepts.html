@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>ثلاثة تصاميم لقراءة القرآن — أذكار المسلم</title>
+  <style>
+    :root {
+      font-family: Tajawal, Cairo, "Noto Sans Arabic", system-ui, sans-serif;
+      color: #23332f;
+      background: #f3f3ed;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --page: #f3f3ed;
+      --surface: #fffefa;
+      --screen: #f7f5ef;
+      --ink: #23332f;
+      --muted: #78847e;
+      --line: #e5e8df;
+      --green: #1f7a6d;
+      --green-soft: #e7f4ed;
+      --gold: #b48a51;
+      --shadow: 0 22px 55px #28352c12, 0 3px 10px #28352c08;
+    }
+    * { box-sizing: border-box; }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --page: #101a18;
+      --surface: #182421;
+      --screen: #121816;
+      --ink: #e8efec;
+      --muted: #9aa9a2;
+      --line: #2a3934;
+      --green: #86c9b5;
+      --green-soft: #203c34;
+      --gold: #d8b77e;
+      --shadow: 0 22px 55px #0005, 0 3px 10px #0003;
+    }
+    body { margin: 0; min-width: 320px; background: var(--page); color: var(--ink); transition: background .25s, color .25s; }
+    button { font: inherit; }
+    .wrap { max-width: 1310px; margin: auto; padding: 34px 22px 48px; }
+    .topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .brand { display: flex; align-items: center; gap: 9px; color: var(--green); font-weight: 800; }
+    .brand-mark { display: grid; place-items: center; width: 37px; height: 37px; border-radius: 14px; background: var(--green-soft); font-size: 19px; }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .tool-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); cursor: pointer; font-size: 13px; font-weight: 700; }
+    .tool-button.primary { border-color: var(--green); background: var(--green); color: #fff; }
+    .tool-button:disabled { opacity: .65; cursor: wait; }
+    .intro { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+    .eyebrow { color: var(--green); font-size: 13px; font-weight: 800; letter-spacing: .03em; }
+    h1 { margin: 7px 0 8px; font-size: clamp(27px, 4vw, 40px); line-height: 1.35; letter-spacing: -.03em; }
+    .intro p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .api-note { display: inline-flex; align-items: center; gap: 7px; margin-top: 11px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); background: var(--surface); font-size: 11px; }
+    .api-note code { direction: ltr; color: var(--green); font-size: 10px; }
+    .status { min-height: 21px; margin: 6px auto 0; color: var(--muted); font-size: 12px; }
+    .designs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .design { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); transition: transform .2s, border-color .2s; }
+    .design:hover { transform: translateY(-3px); }
+    .design.selected { border-color: var(--green); box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 18%, transparent), var(--shadow); }
+    .design-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 16px 17px 12px; }
+    .design-num { color: var(--green); font-size: 11px; font-weight: 800; }
+    .design h2 { margin: 3px 0 4px; font-size: 19px; }
+    .design-head p { min-height: 38px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .selected-label { display: none; white-space: nowrap; padding: 5px 9px; border-radius: 99px; color: var(--green); background: var(--green-soft); font-size: 10px; font-weight: 800; }
+    .selected .selected-label { display: inline-block; }
+    .phone-wrap { display: flex; justify-content: center; padding: 2px 12px 13px; }
+    .phone { position: relative; width: 100%; max-width: 315px; height: 490px; overflow: hidden; border: 7px solid #222a27; border-radius: 31px; background: var(--screen); box-shadow: 0 12px 30px #1c29231f; }
+    .phone:before { content: ""; position: absolute; z-index: 5; width: 62px; height: 16px; top: 0; left: 50%; transform: translateX(-50%); border-radius: 0 0 12px 12px; background: #222a27; }
+    .phone-inner { height: 100%; overflow: auto; scrollbar-width: none; }
+    .phone-inner::-webkit-scrollbar { display: none; }
+    .statusbar { height: 28px; display: flex; justify-content: space-between; padding: 7px 13px 0; color: var(--muted); font-size: 9px; font-weight: 700; direction: ltr; }
+    .app-head { display: flex; align-items: center; justify-content: space-between; min-height: 47px; margin: 0 13px; padding: 2px 0 9px; border-bottom: 1px solid var(--line); background: var(--screen); }
+    .app-head strong { font-size: 13px; }
+    .app-head .head-actions { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 15px; }
+    .surah-meta { display: flex; align-items: center; justify-content: space-between; margin: 11px 14px; color: var(--muted); font-size: 9px; }
+    .surah-meta strong { color: var(--ink); font-size: 11px; }
+    .surah-title { margin: 0 12px; padding: 10px 8px; border: 1px solid var(--line); border-radius: 14px; text-align: center; }
+    .surah-title h3 { margin: 0; font-family: Amiri, "Noto Naskh Arabic", Georgia, serif; font-size: 19px; }
+    .surah-title small { color: var(--muted); font-size: 9px; }
+    .basmala { margin: 10px 16px 5px; text-align: center; font-family: Amiri, "Noto Naskh Arabic", Georgia, serif; font-size: 18px; line-height: 1.8; }
+    .mushaf { margin: 0 11px 13px; padding: 13px 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+    .mushaf .ayah-flow { font-family: Amiri, "Noto Naskh Arabic", Georgia, serif; font-size: 20px; line-height: 2.05; text-align: justify; }
+    .ornate-num { display: inline-grid; place-items: center; width: 21px; height: 21px; margin-inline: 3px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-family: Tajawal, sans-serif; font-size: 9px; vertical-align: middle; }
+    .mushaf-footer { display: flex; justify-content: space-between; padding-top: 8px; margin-top: 7px; border-top: 1px solid color-mix(in srgb, var(--gold) 30%, var(--line)); color: var(--muted); font-size: 9px; }
+    .ayah-list { display: grid; gap: 8px; padding: 0 11px; }
+    .ayah-card { display: flex; align-items: flex-start; gap: 9px; padding: 11px 10px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+    .ayah-marker { display: grid; place-items: center; flex: 0 0 25px; height: 25px; border-radius: 50%; background: var(--green-soft); color: var(--green); font-size: 9px; font-weight: 800; }
+    .ayah-text { flex: 1; font-family: Amiri, "Noto Naskh Arabic", Georgia, serif; font-size: 18px; line-height: 1.9; }
+    .ayah-controls { display: flex; align-items: center; gap: 6px; padding-top: 2px; color: var(--muted); font-size: 12px; }
+    .reader-footer { display: flex; justify-content: space-between; align-items: center; margin: 10px 13px 12px; padding-top: 9px; border-top: 1px solid var(--line); color: var(--muted); font-size: 9px; }
+    .page-progress { height: 3px; margin: 0 13px; overflow: hidden; border-radius: 9px; background: var(--line); }
+    .page-progress i { display: block; width: 18%; height: 100%; border-radius: inherit; background: var(--green); }
+    .single-focus { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 290px; margin: 12px; padding: 22px 14px; border: 1px solid var(--line); border-radius: 23px; background: var(--surface); text-align: center; }
+    .single-focus .ayah-text { font-size: 27px; line-height: 2.05; }
+    .focus-ref { margin-top: 14px; color: var(--green); font-size: 10px; }
+    .focus-actions { display: flex; gap: 8px; justify-content: center; margin-top: 17px; }
+    .tiny-action { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 12px; color: var(--muted); background: var(--screen); }
+    .focus-nav { display: flex; justify-content: space-between; align-items: center; margin: 0 16px; }
+    .nav-button { min-height: 40px; padding: 7px 12px; border: 0; border-radius: 13px; color: var(--green); background: var(--green-soft); font-size: 11px; font-weight: 800; }
+    .dots { color: var(--muted); font-size: 9px; letter-spacing: 2px; }
+    .reading-progress { margin: 12px 14px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
+    .reading-progress-top { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 9px; }
+    .reading-progress-top strong { color: var(--green); }
+    .reading-progress .page-progress { margin: 8px 0 0; }
+    .float-reader { position: absolute; z-index: 3; right: 10px; bottom: 20px; left: 10px; display: flex; align-items: center; gap: 9px; padding: 10px 11px; border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line)); border-radius: 17px; background: var(--surface); box-shadow: 0 10px 25px #0c21172b; }
+    .float-reader .float-mark { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 11px; background: var(--green-soft); color: var(--green); font-size: 15px; }
+    .float-reader-copy { flex: 1; }
+    .float-reader-copy strong { display: block; color: var(--green); font-size: 10px; }
+    .float-reader-copy small { color: var(--muted); font-size: 9px; }
+    .float-reader-pct { color: var(--green); font-size: 10px; font-weight: 800; }
+    .float-reader .page-progress { margin: 6px 0 0; }
+    .quran-scrim { position: absolute; z-index: 2; inset: 0; background: #09130d26; }
+    .quran-sheet { position: absolute; z-index: 3; right: 0; bottom: 0; left: 0; padding: 9px 14px 13px; border-radius: 22px 22px 0 0; background: var(--surface); box-shadow: 0 -8px 25px #0c21171b; }
+    .quran-sheet-handle { width: 34px; height: 3px; margin: 0 auto 9px; border-radius: 5px; background: var(--line); }
+    .quran-sheet-row { display: flex; align-items: flex-start; gap: 9px; }
+    .quran-sheet-icon { display: grid; place-items: center; flex: 0 0 32px; height: 32px; border-radius: 11px; background: var(--green-soft); color: var(--green); }
+    .quran-sheet-copy { flex: 1; }
+    .quran-sheet-copy strong { display: block; color: var(--green); font-size: 10px; }
+    .quran-sheet-copy p { margin: 3px 0 0; font-size: 11px; line-height: 1.6; }
+    .quran-sheet-ref { color: var(--muted); font-size: 9px; }
+    .quran-sheet-action { display: block; margin: 6px 0 0 auto; padding: 4px 0; border: 0; background: transparent; color: var(--green); font-size: 11px; font-weight: 800; }
+    .reader-combo { position: absolute; z-index: 3; right: 10px; bottom: 17px; left: 10px; display: flex; align-items: center; gap: 9px; padding: 9px 11px; border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line)); border-radius: 17px; background: var(--surface); box-shadow: 0 10px 25px #0c21172b; }
+    .reader-combo-copy { flex: 1; }
+    .reader-combo-copy strong { display: block; color: var(--green); font-size: 10px; }
+    .reader-combo-copy small { color: var(--muted); font-size: 9px; }
+    .reader-combo button { min-height: 34px; padding: 5px 9px; border: 0; border-radius: 11px; color: #fff; background: var(--green); font-size: 10px; font-weight: 800; }
+    .soft-title { margin: 0 14px 10px; font-size: 11px; }
+    .flow-ayah { display: flex; gap: 8px; align-items: flex-start; padding: 10px 0; margin: 0 14px; border-bottom: 1px solid var(--line); }
+    .flow-ayah .ayah-text { font-size: 18px; line-height: 1.95; }
+    .flow-ayah .ayah-marker { flex-basis: 22px; height: 22px; margin-top: 4px; font-size: 8px; }
+    .inline-actions { display: flex; justify-content: space-between; gap: 10px; padding: 9px 14px; color: var(--muted); font-size: 10px; }
+    .design-foot { display: flex; align-items: center; justify-content: space-between; gap: 9px; padding: 11px 15px 14px; border-top: 1px solid var(--line); }
+    .design-foot span { color: var(--muted); font-size: 11px; }
+    .choose { min-height: 39px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 12px; background: transparent; color: var(--ink); font-size: 11px; font-weight: 700; cursor: pointer; }
+    .choose:hover, .choose:focus-visible { border-color: var(--green); color: var(--green); outline: 2px solid color-mix(in srgb, var(--green) 20%, transparent); outline-offset: 2px; }
+    .selected .choose { border-color: var(--green); background: var(--green); color: #fff; }
+    .page-foot { margin: 18px auto 0; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .page-foot a { color: var(--green); }
+    @media (max-width: 960px) { .designs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .wrap { padding: 20px 13px 32px; } .topline { margin-bottom: 20px; } .intro { margin-bottom: 18px; } .top-actions { gap: 5px; } .tool-button { padding-inline: 10px; font-size: 11px; } .designs { grid-template-columns: 1fr; gap: 13px; max-width: 390px; margin-inline: auto; } .phone { max-width: 330px; height: 500px; } .design-head p { min-height: 0; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topline">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">۞</span><span>أذكار المسلم</span></div>
+      <div class="top-actions">
+        <button class="tool-button primary" id="loadApi" type="button">جلب الفاتحة من API</button>
+        <button class="tool-button" id="themeToggle" type="button" aria-pressed="false"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeText">سكينة · فاتح</span></button>
+      </div>
+    </div>
+    <header class="intro">
+      <div class="eyebrow">إضافة جديدة إلى صفحة القراءة</div>
+      <h1>ثلاثة تصاميم من رفيق وخطوة</h1>
+      <p>أعدتُ تصاميم القراءة بروح البطاقة العائمة من رفيق ٢ والنافذة السفلية من خطوة ٣، مع خيار يجمع الأسلوبين.</p>
+      <div class="api-note"><span>مصدر النص</span><code>api.alquran.cloud/v1/surah/1</code><span>· رواية/نسخة عربية برسم عثماني</span></div>
+      <div class="status" id="apiStatus" role="status" aria-live="polite">المعاينة تستخدم نصًا مضمّنًا؛ اضغط لجلب النص الحي.</div>
+    </header>
+
+    <section class="designs" aria-label="ثلاثة تصاميم لصفحة قراءة القرآن">
+      <article class="design" data-design="rafiq">
+        <header class="design-head"><div><div class="design-num">التصميم ٠١ · مستوحى من رفيق ٢</div><h2>رفيق القراءة</h2><p>قراءة متصلة مع بطاقة تقدم عائمة تحفظ موضعك بلمحة.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة تصميم رفيق القراءة">
+          <div class="phone-inner">
+            <div class="statusbar"><span>9:41</span><span>● ● ▰</span></div>
+            <div class="app-head"><strong>القرآن الكريم</strong><span class="head-actions"><span>⌕</span><span>⋮</span></span></div>
+            <div class="surah-meta"><strong class="surah-name">الفاتحة</strong><span>مكية · ٧ آيات</span></div>
+            <div class="surah-title"><h3>سُورَةُ ٱلْفَاتِحَةِ</h3><small>مكية · ٧ آيات</small></div>
+            <div class="mushaf"><div class="ayah-flow" data-render="flow"></div><div class="mushaf-footer"><span>الجزء الأول</span><span>صفحة ١</span></div></div>
+            <div class="reader-footer"><span>الفاتحة</span><span>١ / ١١٤</span></div>
+          </div>
+          <div class="float-reader"><span class="float-mark" aria-hidden="true">۞</span><div class="float-reader-copy"><strong>موضعك محفوظ</strong><small>الفاتحة · الآية ١ من ٧</small><div class="page-progress"><i></i></div></div><span class="float-reader-pct">١٤٪</span></div>
+        </div></div>
+        <footer class="design-foot"><span>بطاقة عائمة · مرجع رفيق ٢</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+
+      <article class="design" data-design="khatwa">
+        <header class="design-head"><div><div class="design-num">التصميم ٠٢ · مستوحى من خطوة ٣</div><h2>خطوة مع الآية</h2><p>آية واحدة في بؤرة القراءة، والنافذة السفلية تحفظ التركيز.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة تصميم خطوة مع الآية">
+          <div class="phone-inner">
+            <div class="statusbar"><span>9:41</span><span>● ● ▰</span></div>
+            <div class="app-head"><strong>القرآن الكريم</strong><span class="head-actions"><span>⌕</span><span>⋮</span></span></div>
+            <div class="surah-meta"><strong class="surah-name">الفاتحة</strong><span>الآية <b id="focusAyahNo">١</b> من ٧</span></div>
+            <div class="single-focus"><div class="ayah-text" id="focusAyah"></div><div class="focus-ref">سُورَةُ ٱلْفَاتِحَةِ · <span id="focusRef">١</span></div><div class="focus-actions"><span class="tiny-action" aria-label="إشارة مرجعية">♧</span><span class="tiny-action" aria-label="تشغيل التلاوة">▶</span><span class="tiny-action" aria-label="المزيد">⋯</span></div></div>
+            <div class="focus-nav"><button class="nav-button" id="prevAyah" type="button">السابق</button><span class="dots">● ○ ○ ○ ○ ○ ○</span><button class="nav-button" id="nextAyah" type="button">التالي ←</button></div>
+            <div class="reader-footer"><span>متابعة القراءة</span><span>١ / ٧</span></div>
+          </div>
+          <div class="quran-scrim"></div><div class="quran-sheet"><div class="quran-sheet-handle"></div><div class="quran-sheet-row"><span class="quran-sheet-icon" aria-hidden="true">♡</span><div class="quran-sheet-copy"><strong>أكمل تلاوتك على مهل</strong><p>احفظ موضعك، وتابع آيةً بعد آية.</p><span class="quran-sheet-ref">الفاتحة · الآية <span id="sheetAyahRef">١</span></span></div></div><button class="quran-sheet-action" type="button">متابعة القراءة ←</button></div>
+        </div></div>
+        <footer class="design-foot"><span>نافذة سفلية · مرجع خطوة ٣</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+
+      <article class="design" data-design="blend">
+        <header class="design-head"><div><div class="design-num">التصميم ٠٣ · يجمع رفيق ٢ وخطوة ٣</div><h2>رفيق وسكينة</h2><p>تلاوة متصلة مع موضع محفوظ وبطاقة متابعة صغيرة.</p></div><span class="selected-label">المختار</span></header>
+        <div class="phone-wrap"><div class="phone" aria-label="معاينة تصميم رفيق وسكينة">
+          <div class="phone-inner">
+            <div class="statusbar"><span>9:41</span><span>● ● ▰</span></div>
+            <div class="app-head"><strong>القرآن الكريم</strong><span class="head-actions"><span>⌕</span><span>⋮</span></span></div>
+            <div class="surah-meta"><strong class="surah-name">الفاتحة</strong><span>مكية · ٧ آيات</span></div>
+            <div class="reading-progress"><div class="reading-progress-top"><span>موضع القراءة</span><strong>الآية ١ من ٧</strong></div><div class="page-progress"><i></i></div></div>
+            <h3 class="soft-title">سُورَةُ ٱلْفَاتِحَةِ</h3>
+            <div class="ayah-stack" data-render="stack"></div>
+            <div class="inline-actions"><span>♧ حفظ الموضع</span><span>▶ استماع</span><span>↑ مشاركة</span></div>
+            <div class="reader-footer"><span>الجزء ١ · الحزب ١</span><span>السورة التالية ←</span></div>
+          </div>
+          <div class="reader-combo"><span class="float-mark" aria-hidden="true">♡</span><div class="reader-combo-copy"><strong>موضع القراءة محفوظ</strong><small>الفاتحة · الآية ١</small></div><button type="button">متابعة ←</button></div>
+        </div></div>
+        <footer class="design-foot"><span>دمج البطاقة العائمة والنافذة</span><button class="choose" type="button">اختر هذا التصميم</button></footer>
+      </article>
+    </section>
+    <footer class="page-foot" id="selection" aria-live="polite">اختر التصميم الذي تفضله؛ ستظهر هنا اختياراتك.<br>مصدر المعاينة: <a href="https://alquran.cloud/api">توثيق AlQuran Cloud</a></footer>
+  </main>
+  <script>
+    const ayahs = [
+      'بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ',
+      'ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَـٰلَمِینَ',
+      'ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ',
+      'مَـٰلِكِ یَوۡمِ ٱلدِّینِ',
+      'إِیَّاكَ نَعۡبُدُ وَإِیَّاكَ نَسۡتَعِینُ',
+      'ٱهۡدِنَا ٱلصِّرَ ٰ⁠طَ ٱلۡمُسۡتَقِیمَ',
+      'صِرَ ٰ⁠طَ ٱلَّذِینَ أَنۡعَمۡتَ عَلَیۡهِمۡ غَیۡرِ ٱلۡمَغۡضُوبِ عَلَیۡهِمۡ وَلَا ٱلضَّاۤلِّینَ'
+    ];
+    const toArabic = (value) => String(value).replace(/\d/g, (digit) => '٠١٢٣٤٥٦٧٨٩'[digit]);
+    const flow = document.querySelector('[data-render="flow"]');
+    const stack = document.querySelector('[data-render="stack"]');
+    const focusAyah = document.getElementById('focusAyah');
+    const focusRef = document.getElementById('focusRef');
+    const focusNo = document.getElementById('focusAyahNo');
+    const sheetAyahRef = document.getElementById('sheetAyahRef');
+    const dots = document.querySelector('.dots');
+    const status = document.getElementById('apiStatus');
+    const apiButton = document.getElementById('loadApi');
+    let focusIndex = 0;
+    function renderText() {
+      flow.replaceChildren();
+      ayahs.forEach((text, index) => {
+        flow.append(document.createTextNode(text + ' '));
+        const marker = document.createElement('span');
+        marker.className = 'ornate-num';
+        marker.textContent = toArabic(index + 1);
+        marker.setAttribute('aria-label', `الآية ${toArabic(index + 1)}`);
+        flow.append(marker, document.createTextNode(' '));
+      });
+      stack.replaceChildren();
+      ayahs.forEach((text, index) => {
+        const row = document.createElement('div');
+        row.className = 'flow-ayah';
+        const marker = document.createElement('span');
+        marker.className = 'ayah-marker';
+        marker.textContent = toArabic(index + 1);
+        const content = document.createElement('span');
+        content.className = 'ayah-text';
+        content.textContent = text;
+        row.append(marker, content);
+        stack.append(row);
+      });
+      focusAyah.textContent = ayahs[focusIndex];
+      focusRef.textContent = toArabic(focusIndex + 1);
+      focusNo.textContent = toArabic(focusIndex + 1);
+      sheetAyahRef.textContent = toArabic(focusIndex + 1);
+      dots.textContent = ayahs.map((_, index) => index === focusIndex ? '●' : '○').join(' ');
+    }
+    renderText();
+    document.getElementById('prevAyah').addEventListener('click', () => {
+      focusIndex = Math.max(0, focusIndex - 1);
+      renderText();
+    });
+    document.getElementById('nextAyah').addEventListener('click', () => {
+      focusIndex = Math.min(ayahs.length - 1, focusIndex + 1);
+      renderText();
+    });
+    document.getElementById('themeToggle').addEventListener('click', (event) => {
+      const dark = document.documentElement.dataset.theme !== 'dark';
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      event.currentTarget.setAttribute('aria-pressed', String(dark));
+      document.getElementById('themeText').textContent = dark ? 'ليل · داكن' : 'سكينة · فاتح';
+      document.getElementById('themeIcon').textContent = dark ? '☾' : '☼';
+    });
+    const names = { rafiq: 'رفيق القراءة', khatwa: 'خطوة مع الآية', blend: 'رفيق وسكينة' };
+    const cards = [...document.querySelectorAll('.design')];
+    const selection = document.getElementById('selection');
+    cards.forEach((card) => card.querySelector('.choose').addEventListener('click', () => {
+      cards.forEach((item) => item.classList.toggle('selected', item === card));
+      selection.innerHTML = `التصميم المختار: ${names[card.dataset.design]} · يمكنك تغيير الاختيار في أي وقت.<br>مصدر المعاينة: <a href="https://alquran.cloud/api">توثيق AlQuran Cloud</a>`;
+    }));
+    apiButton.addEventListener('click', async () => {
+      apiButton.disabled = true;
+      status.textContent = 'جارٍ جلب سورة الفاتحة…';
+      try {
+        const response = await fetch('https://api.alquran.cloud/v1/surah/1', { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        if (payload.code !== 200 || !Array.isArray(payload.data?.ayahs) || payload.data.ayahs.length !== 7) throw new Error('Unexpected Quran response');
+        ayahs.splice(0, ayahs.length, ...payload.data.ayahs.map((ayah) => ayah.text.trim()));
+        focusIndex = 0;
+        renderText();
+        status.textContent = `تم جلب ${toArabic(ayahs.length)} آيات من سورة الفاتحة.`;
+      } catch (_) {
+        status.textContent = 'تعذّر الاتصال الآن؛ بقيت المعاينة ظاهرة بالنص المضمّن.';
+      } finally {
+        apiButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

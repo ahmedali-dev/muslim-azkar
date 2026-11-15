@@ -11,6 +11,7 @@ class AppSettings {
     this.morningMinutes = 330,
     this.eveningMinutes = 990,
     this.asrMinutes = 960,
+    this.quranReaderDesign = 3,
   });
 
   int fontLevel;
@@ -21,6 +22,7 @@ class AppSettings {
   int morningMinutes;
   int eveningMinutes;
   int asrMinutes;
+  int quranReaderDesign;
   double get fontSize => [25.0, 30.0, 36.0][fontLevel];
   bool enabled(AzkarPeriod p) => switch (p) {
     AzkarPeriod.morning => morningEnabled,
@@ -54,6 +56,7 @@ class AppSettings {
     'eveningEnabled': eveningEnabled,
     'morningMinutes': morningMinutes,
     'eveningMinutes': eveningMinutes,
+    'quranReaderDesign': quranReaderDesign,
   };
   factory AppSettings.fromJson(Map<String, dynamic> j) => AppSettings(
     asrMinutes: ((j['asrMinutes'] as int?) ?? 960).clamp(720, 1439),
@@ -67,5 +70,6 @@ class AppSettings {
     eveningEnabled: j['eveningEnabled'] as bool? ?? false,
     morningMinutes: ((j['morningMinutes'] as int?) ?? 330).clamp(0, 1439),
     eveningMinutes: ((j['eveningMinutes'] as int?) ?? 990).clamp(0, 1439),
+    quranReaderDesign: ((j['quranReaderDesign'] as int?) ?? 3).clamp(2, 3),
   );
 }

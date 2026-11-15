@@ -29,10 +29,10 @@ class AboutScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              const Text('الإصدار ١.٤.١', textAlign: TextAlign.center),
+              const Text('الإصدار ١.٥.٠', textAlign: TextAlign.center),
               const SizedBox(height: 28),
               const Text(
-                'رفيقك للأذكار والأدعية في ٢٧ قسمًا، يعمل بالكامل دون إنترنت.\n'
+                'رفيقك للأذكار والأدعية في ٢٧ قسمًا، مع القرآن الكريم. تعمل الأذكار دون إنترنت، ويُحمّل نص القرآن كاملًا عند أول فتح ثم يُحفظ للقراءة دون اتصال.\n'
                 'لا إعلانات، ولا تتبّع، ولا جمع للبيانات. يُحفظ تقدمك وإعداداتك على جهازك فقط.',
                 style: TextStyle(fontSize: 17, height: 1.8),
               ),
@@ -44,6 +44,16 @@ class AboutScreen extends StatelessWidget {
               const SizedBox(height: 8),
               const Text(
                 'النصوص والتكرارات والفضائل من موقع إسلام بوك. نُقلت كما وردت في صفحات المصدر بتاريخ ٢ نوفمبر ٢٠٢٦؛ لا تُضاف أحكام على الروايات داخل التطبيق.',
+                style: TextStyle(height: 1.8),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'مصدر نص القرآن الكريم',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'النص العربي بالرسم العثماني وبيانات السور والآيات من AlQuran Cloud، إصدار quran-uthmani-quran-academy. يُحفظ النص كما يورده المصدر. واجهة API: api.alquran.cloud/v1/quran/quran-uthmani-quran-academy. شروط الاستخدام: alquran.cloud/terms-and-conditions.',
                 style: TextStyle(height: 1.8),
               ),
               const SizedBox(height: 12),
@@ -76,7 +86,7 @@ class AboutScreen extends StatelessWidget {
                 onPressed: () => showLicensePage(
                   context: context,
                   applicationName: 'أذكار المسلم',
-                  applicationVersion: '١.٤.١',
+                  applicationVersion: '١.٥.٠',
                 ),
                 child: const Text('تراخيص البرمجيات'),
               ),

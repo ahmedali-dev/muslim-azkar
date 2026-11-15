@@ -242,6 +242,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
+                heading('قراءة القرآن'),
+                GlassCard(
+                  margin: EdgeInsets.zero,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          'تصميم صفحة القراءة',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            ChoiceChip(
+                              label: const Text('٢ · خطوة مع الآية'),
+                              selected: settings.quranReaderDesign == 2,
+                              onSelected: (_) => state.updateSettings(
+                                (s) => s.quranReaderDesign = 2,
+                              ),
+                            ),
+                            ChoiceChip(
+                              label: const Text('٣ · رفيق وسكينة'),
+                              selected: settings.quranReaderDesign == 3,
+                              onSelected: (_) => state.updateSettings(
+                                (s) => s.quranReaderDesign = 3,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          settings.quranReaderDesign == 2
+                              ? 'آية واحدة في كل شاشة، مع انتقال وحفظ للموضع.'
+                              : 'قراءة متصلة صفحةً بعد صفحة، مع بطاقة تحفظ موضعك.',
+                          style: TextStyle(
+                            color: theme.colorScheme.onSurfaceVariant,
+                            height: 1.6,
+                          ),
+                        ),
+                        const Divider(height: 24),
+                        const ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Icon(Icons.cloud_download_outlined),
+                          title: Text('نص القرآن من AlQuran Cloud'),
+                          subtitle: Text(
+                            'يُحمّل عند أول فتح، ثم يُحفظ على الجهاز للقراءة دون اتصال.',
+                            style: TextStyle(height: 1.5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 heading('كما تحب'),
                 GlassCard(
                   margin: EdgeInsets.zero,
