@@ -109,7 +109,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
           !_shownEncouragements.contains(value),
       orElse: () => 0,
     );
-    if (milestone == 0 || !mounted) return;
+    if (milestone == 0 || !mounted || after >= 1) return;
     _shownEncouragements.add(milestone);
     await showModalBottomSheet<void>(
       context: context,
