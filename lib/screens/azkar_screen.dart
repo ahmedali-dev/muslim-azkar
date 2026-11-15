@@ -25,6 +25,12 @@ class _AzkarScreenState extends State<AzkarScreen> {
   late String _day;
   bool _review = false;
   bool _advancing = false;
+  final Set<int> _shownEncouragements = {};
+  static const _encouragements = <int, String>{
+    25: 'أحسنت، كل ذكر تقرؤه يقرّبك من إتمام وردك.',
+    50: 'بلغت منتصف الطريق، واصل بقلب حاضر.',
+    75: 'لم يبقَ إلا القليل، اجعل ختام وردك أجمل.',
+  };
   @override
   void initState() {
     super.initState();
@@ -55,11 +61,13 @@ class _AzkarScreenState extends State<AzkarScreen> {
   Future<void> _tap(Zikr z) async {
     final state = context.read<AppState>();
     if (_advancing || state.progress.remaining(widget.period, z) == 0) return;
+    final previousProgress = state.fraction(widget.period);
     if (state.settings.vibration) {
       HapticFeedback.lightImpact();
     }
     _review = false;
     final finished = state.tap(widget.period, z);
+    _showEncouragement(previousProgress, state.fraction(widget.period));
     if (!finished) return;
     _advancing = true;
     final current = _index;
@@ -86,6 +94,42 @@ class _AzkarScreenState extends State<AzkarScreen> {
       }
     }
     if (mounted) setState(() => _advancing = false);
+  }
+
+  void _showEncouragement(double before, double after) {
+    final milestone = _encouragements.keys.firstWhere(
+      (value) =>
+          before < value / 100 &&
+          after >= value / 100 &&
+          !_shownEncouragements.contains(value),
+      orElse: () => 0,
+    );
+    if (milestone == 0 || !mounted) return;
+    _shownEncouragements.add(milestone);
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
+        content: Row(
+          children: [
+            Icon(
+              Icons.auto_awesome_rounded,
+              color: Theme.of(context).colorScheme.onInverseSurface,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                _encouragements[milestone]!,
+                textAlign: TextAlign.start,
+                style: const TextStyle(height: 1.5),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -418,6 +462,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       onReview: () => _returnToStart(true),
                       onRestart: () {
                         state.restart(widget.period);
+        _shownEncouragements.clear();
                         _returnToStart(false);
                       },
                     ),
