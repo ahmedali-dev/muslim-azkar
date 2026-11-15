@@ -9,51 +9,21 @@ class QuranController extends ChangeNotifier {
   final QuranRepository repository;
   QuranData? data;
   bool loading = false;
-  bool refreshing = false;
   String? error;
 
-  bool get busy => loading || refreshing;
-
   Future<void> load() async {
-    if (busy || data != null) return;
+    if (loading || data != null) return;
     loading = true;
     error = null;
     notifyListeners();
     try {
-      data = await repository.readCache();
+      data = await repository.loadBundled();
     } catch (_) {
-      data = null;
-    }
-    if (data != null) {
+      error =
+          'تعذّر فتح نسخة القرآن المضمّنة. أعد المحاولة أو أعد تثبيت التطبيق.';
+    } finally {
       loading = false;
       notifyListeners();
-      return;
     }
-    loading = false;
-    notifyListeners();
-    await refresh();
-  }
-
-  Future<void> refresh() async {
-    if (busy) return;
-    refreshing = true;
-    error = null;
-    notifyListeners();
-    try {
-      data = await repository.download();
-    } catch (_) {
-      error = data == null
-          ? 'تعذّر تحميل نص القرآن. تحقق من الاتصال ثم أعد المحاولة.'
-          : 'تعذّر التحديث؛ يمكنك المتابعة بالنص المحفوظ على جهازك.';
-    } finally {
-      refreshing = false;
-      notifyListeners();
-    }
-  }
-
-  @override
-  void dispose() {
-    repository.dispose();
-    super.dispose();
   }
 }

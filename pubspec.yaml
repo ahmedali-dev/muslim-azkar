@@ -1,7 +1,7 @@
 name: muslim_azkar
 description: Arabic offline azkar and supplications in 27 categories.
 publish_to: none
-version: 1.6.0+12
+version: 1.6.1+13
 
 environment:
   sdk: '>=3.8.0 <4.0.0'
@@ -13,8 +13,6 @@ dependencies:
     sdk: flutter
   provider: ^6.1.5
   shared_preferences: ^2.5.3
-  http: ^1.6.0
-  path_provider: ^2.1.5
   flutter_local_notifications: 19.5.0
   timezone: ^0.10.1
 
@@ -30,6 +28,7 @@ flutter:
   assets:
     - assets/morning_azkar.json
     - assets/evening_azkar.json
+    - assets/quran-uthmani.json
     - assets/categories/
     - assets/fonts/Amiri-OFL.txt
     - assets/fonts/Tajawal-OFL.txt

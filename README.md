@@ -1,11 +1,11 @@
 # Muslim Azkar · أذكار المسلم
 
 Arabic-only Flutter Android app with **27 azkar categories / 315 entries** and a
-full Quran reader. Azkar work fully offline. The Quran text is downloaded once
-from AlQuran Cloud and cached locally for subsequent offline reading. Includes
-RTL Material 3, bundled Arabic fonts, daily saved progress, themes, and reminders.
+full Quran reader. Azkar and the complete Quran work fully offline. The Quran
+text is bundled in the app, so users never need a network connection to read it.
+Includes RTL Material 3, bundled Arabic fonts, daily saved progress, themes, and reminders.
 
-Version **1.6.0** applies the selected **سكينة (Sakina)** design to light mode
+Version **1.6.1** applies the selected **سكينة (Sakina)** design to light mode
 and **ليل (Layl)** to dark mode. Sakina uses sage-green featured cards, white
 reading surfaces, and a compact tasbih-bead counter. Layl uses deep teal surfaces,
 soft green highlights, and a moon-orbit counter. System theme mode automatically
@@ -49,8 +49,8 @@ update automatically when a new version is published.
 
 ```sh
 # Bump pubspec.yaml first, then publish a matching tag.
-git tag v1.6.0
-git push origin v1.6.0
+git tag v1.6.1
+git push origin v1.6.1
 ```
 
 Workflow references: [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages),
@@ -75,9 +75,9 @@ depend on the installed receiving apps.
 
 Use **Flutter 3.32.8 / Dart 3.8.1** (`.fvmrc`), JDK 17, Android SDK platform 36,
 command-line tools, and NDK 27.0.12077973. This Flutter version retains support
-for Android 6; the app minimum is **API 23**. Internet permission is used only
-to fetch the Quran text from AlQuran Cloud on first open or manual refresh; its
-verified response is cached for offline reading. No other network content is loaded.
+for Android 6; the app minimum is **API 23**. Release builds have no Internet
+permission and load no runtime network content. Quran text from AlQuran Cloud is bundled
+with the app and available offline immediately.
 
 ```sh
 flutter pub get
@@ -116,6 +116,10 @@ such as Quranic supplications, Quran-completion dua, and ruqyah are retained.
 - Original files: `assets/morning_azkar.json` (31 entries / 464 repetitions) and
   `assets/evening_azkar.json` (30 / 364). Existing item IDs and progress keys remain.
 - Additional collections: `assets/categories/<source-id>.json`.
+- Complete Quran text: `assets/quran-uthmani.json`, bundled from the AlQuran
+  Cloud `quran-uthmani-quran-academy` edition and validated for all 114 surahs,
+  6,236 ayahs, and 604 page numbers. Text is preserved as supplied and is
+  available offline without a first-run download.
 - Ordered category titles, exact source links, counts, and asset paths:
   `assets/categories/catalog.json`. The About screen credits all 27 source pages.
 - Arabic words, punctuation, diacritics, source repetition counts, and visible

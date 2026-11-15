@@ -110,16 +110,6 @@ class _QuranScreenState extends State<QuranScreen> {
                 ),
                 icon: const Icon(Icons.tune_rounded),
               ),
-              IconButton(
-                tooltip: 'تحديث نص القرآن من المصدر',
-                onPressed: _quran.busy ? null : _quran.refresh,
-                icon: _quran.refreshing
-                    ? const SizedBox.square(
-                        dimension: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.sync_rounded),
-              ),
             ],
           ),
           body: SafeArea(
@@ -140,7 +130,7 @@ class _QuranScreenState extends State<QuranScreen> {
   }
 
   Widget _loadingOrError(QuranController controller, ColorScheme colors) {
-    if (controller.busy) {
+    if (controller.loading) {
       return Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 340),
@@ -152,13 +142,13 @@ class _QuranScreenState extends State<QuranScreen> {
                 CircularProgressIndicator(color: colors.primary),
                 const SizedBox(height: 20),
                 const Text(
-                  'جارٍ تحميل نص القرآن كاملًا لأول مرة',
+                  'جارٍ تجهيز المصحف المحفوظ داخل التطبيق',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'سيُحفظ على جهازك لتتمكن من القراءة دون اتصال.',
+                  'النص كامل ومتاح دون إنترنت، ولا يلزم تنزيله.',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: colors.onSurfaceVariant, height: 1.6),
                 ),
@@ -185,13 +175,13 @@ class _QuranScreenState extends State<QuranScreen> {
               ),
               const SizedBox(height: 16),
               FilledButton.icon(
-                onPressed: controller.busy ? null : controller.load,
-                icon: const Icon(Icons.download_rounded),
+                onPressed: controller.loading ? null : controller.load,
+                icon: const Icon(Icons.refresh_rounded),
                 label: const Text('إعادة المحاولة'),
               ),
               const SizedBox(height: 10),
               const Text(
-                'يحتاج التنزيل الأول إلى اتصال بالإنترنت.',
+                'المصحف مضمّن في التطبيق؛ لا حاجة إلى اتصال بالإنترنت.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12),
               ),
@@ -217,8 +207,8 @@ class _QuranScreenState extends State<QuranScreen> {
             content: Text(error),
             actions: [
               TextButton(
-                onPressed: _quran.refreshing ? null : _quran.refresh,
-                child: const Text('تحديث'),
+                onPressed: _quran.loading ? null : _quran.load,
+                child: const Text('إعادة المحاولة'),
               ),
             ],
           ),

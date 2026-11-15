@@ -29,10 +29,10 @@ class AboutScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              const Text('الإصدار ١.٦.٠', textAlign: TextAlign.center),
+              const Text('الإصدار ١.٦.١', textAlign: TextAlign.center),
               const SizedBox(height: 28),
               const Text(
-                'رفيقك للأذكار والأدعية في ٢٧ قسمًا، مع القرآن الكريم. تعمل الأذكار دون إنترنت، ويُحمّل نص القرآن كاملًا عند أول فتح ثم يُحفظ للقراءة دون اتصال.\n'
+                'رفيقك للأذكار والأدعية في ٢٧ قسمًا، مع مصحف كامل مضمّن في التطبيق. تعمل الأذكار والقرآن دون إنترنت، ولا يُنزّل التطبيق محتوى من الشبكة.\n'
                 'لا إعلانات، ولا تتبّع، ولا جمع للبيانات. يُحفظ تقدمك وإعداداتك على جهازك فقط.',
                 style: TextStyle(fontSize: 17, height: 1.8),
               ),
@@ -53,7 +53,7 @@ class AboutScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               const Text(
-                'النص العربي بالرسم العثماني وبيانات السور والآيات من AlQuran Cloud، إصدار quran-uthmani-quran-academy. يُحفظ النص كما يورده المصدر. واجهة API: api.alquran.cloud/v1/quran/quran-uthmani-quran-academy. شروط الاستخدام: alquran.cloud/terms-and-conditions.',
+                'النص العربي بالرسم العثماني وبيانات السور والآيات من AlQuran Cloud، إصدار quran-uthmani-quran-academy. أُدرج النص كما يورده المصدر في ملف داخل التطبيق، ويعمل المصحف دون اتصال. المصدر: api.alquran.cloud/v1/quran/quran-uthmani-quran-academy. الشروط: alquran.cloud/terms-and-conditions.',
                 style: TextStyle(height: 1.8),
               ),
               const SizedBox(height: 12),
@@ -86,7 +86,7 @@ class AboutScreen extends StatelessWidget {
                 onPressed: () => showLicensePage(
                   context: context,
                   applicationName: 'أذكار المسلم',
-                  applicationVersion: '١.٦.٠',
+                  applicationVersion: '١.٦.١',
                 ),
                 child: const Text('تراخيص البرمجيات'),
               ),

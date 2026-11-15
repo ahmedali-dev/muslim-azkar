@@ -5,7 +5,7 @@
 - سكينة light mode and ليل dark mode, with compact counters.
 - 27 azkar categories and 315 original Arabic entries, usable offline.
 - Full Quran reader with switchable ayah-focused and page-by-page reading designs.
-- Quran text is fetched from AlQuran Cloud, verified, and cached for offline use.
+- The complete Quran is bundled from AlQuran Cloud and available offline immediately; users do not need to download Quran content.
 - Daily progress, reminder settings, text sharing, and square/portrait image sharing.
 - APKs for Android 6 (API 23) and newer; each architecture APK is under 15 MB.
 

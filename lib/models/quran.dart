@@ -57,18 +57,21 @@ class QuranSurah {
     if (ayahData is! List) {
       throw const FormatException('سورة بلا آيات.');
     }
+    final ayahs = List<QuranAyah>.unmodifiable(
+      ayahData.map(
+        (ayah) => QuranAyah.fromJson(ayah as Map<String, dynamic>, number),
+      ),
+    );
     return QuranSurah(
       number: number,
       name: _requiredString(json, 'name'),
       englishName: _requiredString(json, 'englishName'),
       englishNameTranslation: _requiredString(json, 'englishNameTranslation'),
-      numberOfAyahs: _requiredInt(json, 'numberOfAyahs'),
+      numberOfAyahs: json['numberOfAyahs'] is int
+          ? json['numberOfAyahs'] as int
+          : ayahs.length,
       revelationType: _requiredString(json, 'revelationType'),
-      ayahs: List.unmodifiable(
-        ayahData.map(
-          (ayah) => QuranAyah.fromJson(ayah as Map<String, dynamic>, number),
-        ),
-      ),
+      ayahs: ayahs,
     );
   }
 }

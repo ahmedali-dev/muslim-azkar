@@ -288,10 +288,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const Divider(height: 24),
                         const ListTile(
                           contentPadding: EdgeInsets.zero,
-                          leading: Icon(Icons.cloud_download_outlined),
-                          title: Text('نص القرآن من AlQuran Cloud'),
+                          leading: Icon(Icons.offline_pin_outlined),
+                          title: Text('مصحف كامل محفوظ داخل التطبيق'),
                           subtitle: Text(
-                            'يُحمّل عند أول فتح، ثم يُحفظ على الجهاز للقراءة دون اتصال.',
+                            'نص القرآن مضمّن في التطبيق؛ لا يحتاج إلى اتصال أو تنزيل.',
                             style: TextStyle(height: 1.5),
                           ),
                         ),
